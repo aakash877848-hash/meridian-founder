@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://meridian-founder.onrender.com/api',
+  baseURL: sed -i '' "s|baseURL: 'https://meridian-founder.onrender.com/api'|baseURL: '/api'|" frontend/src/api/axios.js,
   withCredentials: true, // send/receive httpOnly auth cookies
 });
 
