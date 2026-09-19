@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/axios.js';
+import { Spinner } from '../components/Loading.jsx';
 
 const STAGES = ['New', 'Screening', 'Contacted', 'In Discussion', 'Due Diligence', 'Term Sheet', 'Invested', 'Passed'];
 
@@ -21,7 +22,7 @@ export default function VCPipeline() {
     load();
   };
 
-  if (loading) return <div className="mx-auto max-w-6xl px-6 py-16 text-sm text-ink/50">Loading…</div>;
+  if (loading) return <Spinner label="Loading pipeline" />;
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-12">

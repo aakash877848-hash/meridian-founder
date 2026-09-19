@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api/axios.js';
+import { Spinner } from '../components/Loading.jsx';
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState(null);
@@ -49,20 +50,20 @@ export default function AdminDashboard() {
     load();
   };
 
-  if (!stats) return <div className="mx-auto max-w-6xl px-6 py-16 text-sm text-ink/50">Loading…</div>;
+  if (!stats) return <Spinner label="Loading admin dashboard" />;
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-12">
       <h1 className="font-display text-3xl text-ink mb-8">Admin dashboard</h1>
 
-      <div className="grid grid-cols-4 gap-4 mb-10">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
         <div className="card"><p className="text-xs text-ink/50 mb-1">Founders</p><p className="font-display text-3xl">{stats.totalFounders}</p></div>
         <div className="card"><p className="text-xs text-ink/50 mb-1">Investors</p><p className="font-display text-3xl">{stats.totalInvestors}</p></div>
         <div className="card"><p className="text-xs text-ink/50 mb-1">Startups</p><p className="font-display text-3xl">{stats.totalStartups}</p></div>
         <div className="card"><p className="text-xs text-ink/50 mb-1">Published profiles</p><p className="font-display text-3xl">{stats.submittedProfiles}</p></div>
       </div>
 
-      <div className="grid grid-cols-2 gap-8 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
         <div className="card">
           <h2 className="font-display text-lg mb-3">Startups by sector</h2>
           <ul className="text-sm space-y-1">
@@ -84,7 +85,7 @@ export default function AdminDashboard() {
       <div className="card mb-10">
         <h2 className="font-display text-lg mb-4">Invite an investor or admin</h2>
         {message && <p className="mb-3 text-sm text-signal">{message}</p>}
-        <form onSubmit={createUser} className="grid grid-cols-5 gap-3 items-end">
+        <form onSubmit={createUser} className="grid grid-cols-1 sm:grid-cols-5 gap-3 items-end">
           <div>
             <label className="label">Name</label>
             <input required className="input" value={newUser.name} onChange={(e) => setNewUser({ ...newUser, name: e.target.value })} />

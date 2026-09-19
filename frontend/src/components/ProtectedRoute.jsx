@@ -1,12 +1,13 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import { Spinner } from './Loading.jsx';
 
 export default function ProtectedRoute({ roles, children }) {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <div className="flex h-screen items-center justify-center text-sm text-ink/50">Loading…</div>;
+    return <div className="flex h-screen items-center justify-center"><Spinner label="Checking session" /></div>;
   }
 
   if (!user) return <Navigate to="/login" replace />;

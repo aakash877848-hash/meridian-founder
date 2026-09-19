@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/axios.js';
+import { Spinner } from '../components/Loading.jsx';
 
 export default function VCShortlist() {
   const [entries, setEntries] = useState([]);
@@ -19,7 +20,7 @@ export default function VCShortlist() {
     load();
   };
 
-  if (loading) return <div className="mx-auto max-w-4xl px-6 py-16 text-sm text-ink/50">Loading…</div>;
+  if (loading) return <Spinner label="Loading shortlist" />;
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-12">

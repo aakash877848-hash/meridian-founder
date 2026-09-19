@@ -15,26 +15,117 @@ body {
   color: #F7F6F3;
 }
 
+/* ---- Motion primitives ---- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out both;
+}
+.animate-float {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+
+.skeleton {
+  background: linear-gradient(90deg, #EAE7DF 25%, #F3F1EB 37%, #EAE7DF 63%);
+  background-size: 800px 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+.spinner {
+  border: 2px solid rgba(18, 21, 27, 0.1);
+  border-top-color: #2E5E4E;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ---- Form elements ---- */
 .input {
-  @apply w-full rounded-none border border-line bg-white px-3 py-2 text-sm text-ink placeholder:text-ink/40 focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal transition-colors;
+  @apply w-full rounded-none border border-line bg-white px-3 py-2 text-sm text-ink placeholder:text-ink/40 outline-none transition-all duration-200;
+}
+.input:focus {
+  @apply border-signal ring-2 ring-signal/15;
+}
+.input:hover:not(:focus) {
+  @apply border-ink/30;
 }
 
 .label {
   @apply block text-[13px] text-ink/70 mb-1;
 }
 
+/* ---- Buttons ---- */
 .btn-primary {
-  @apply inline-flex items-center justify-center bg-signal text-paper px-4 py-2 text-sm font-medium hover:bg-[#234a3d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply relative inline-flex items-center justify-center gap-2 bg-signal text-paper px-4 py-2 text-sm font-medium overflow-hidden transition-all duration-200 ease-out;
+  @apply hover:bg-[#234a3d] hover:shadow-md hover:-translate-y-0.5;
+  @apply active:translate-y-0 active:shadow-none;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center border border-ink/20 text-ink px-4 py-2 text-sm font-medium hover:border-ink/60 transition-colors;
+  @apply inline-flex items-center justify-center gap-2 border border-ink/20 text-ink px-4 py-2 text-sm font-medium transition-all duration-200 ease-out;
+  @apply hover:border-signal hover:text-signal hover:-translate-y-0.5;
+  @apply active:translate-y-0;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0;
 }
 
+/* ---- Cards ---- */
 .card {
-  @apply border border-line bg-white p-5;
+  @apply border border-line bg-white p-5 transition-all duration-200 ease-out;
+}
+.card-interactive {
+  @apply card hover:border-signal/40 hover:shadow-lg hover:-translate-y-1;
 }
 
 .badge {
-  @apply inline-block border border-line px-2 py-0.5 text-xs text-ink/70;
+  @apply inline-flex items-center gap-1 border border-line px-2 py-0.5 text-xs text-ink/70 transition-colors duration-150;
+}
+
+/* ---- Nav link underline ---- */
+.nav-link {
+  @apply relative text-ink/70 transition-colors duration-150 hover:text-signal;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: #2E5E4E;
+  transition: width 0.25s ease-out;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ---- Hero gradient backdrop ---- */
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(46, 94, 78, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(180, 85, 43, 0.06), transparent);
 }

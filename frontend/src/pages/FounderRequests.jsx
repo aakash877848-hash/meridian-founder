@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api/axios.js';
+import { Spinner } from '../components/Loading.jsx';
 
 export default function FounderRequests() {
   const [requests, setRequests] = useState([]);
@@ -18,7 +19,7 @@ export default function FounderRequests() {
     load();
   };
 
-  if (loading) return <div className="mx-auto max-w-3xl px-6 py-16 text-sm text-ink/50">Loading…</div>;
+  if (loading) return <Spinner label="Loading requests" />;
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-12">

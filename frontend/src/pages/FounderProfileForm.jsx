@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api/axios.js';
+import { Spinner } from '../components/Loading.jsx';
 
 const SECTORS = [
   'Fintech', 'Healthtech', 'Edtech', 'SaaS', 'E-commerce', 'Marketplace',
@@ -135,7 +136,7 @@ export default function FounderProfileForm() {
     setProfile((prev) => ({ ...prev, documents: prev.documents.filter((d) => d._id !== docId) }));
   };
 
-  if (loading) return <div className="mx-auto max-w-3xl px-6 py-16 text-sm text-ink/50">Loading…</div>;
+  if (loading) return <Spinner label="Loading your profile" />;
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-12">
@@ -151,7 +152,7 @@ export default function FounderProfileForm() {
       {message && <div className="mb-6 border border-signal/40 bg-signal/5 px-4 py-2 text-sm text-signal">{message}</div>}
 
       <Section title="Founder details">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="label">Full name</label>
             <input className="input" value={profile.founderDetails.fullName} onChange={(e) => set('founderDetails.fullName', e.target.value)} />
@@ -176,7 +177,7 @@ export default function FounderProfileForm() {
       </Section>
 
       <Section title="Startup details">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="label">Startup name</label>
             <input className="input" value={profile.startupName} onChange={(e) => set('startupName', e.target.value)} />
@@ -197,7 +198,7 @@ export default function FounderProfileForm() {
       </Section>
 
       <Section title="Sector, stage & location">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="label">Sector</label>
             <select className="input" value={profile.sector} onChange={(e) => set('sector', e.target.value)}>
@@ -217,7 +218,7 @@ export default function FounderProfileForm() {
             </select>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="label">Country</label>
             <input className="input" value={profile.location.country} onChange={(e) => set('location.country', e.target.value)} />
@@ -249,7 +250,7 @@ export default function FounderProfileForm() {
       </Section>
 
       <Section title="Traction & revenue">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="label">Product stage</label>
             <select className="input" value={profile.traction.stageOfProduct} onChange={(e) => set('traction.stageOfProduct', e.target.value)}>
@@ -285,7 +286,7 @@ export default function FounderProfileForm() {
       </Section>
 
       <Section title="Fundraising">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="label">Amount seeking (USD)</label>
             <input type="number" className="input" value={profile.fundraising.amountSeekingUSD} onChange={(e) => set('fundraising.amountSeekingUSD', e.target.value)} />
@@ -315,7 +316,7 @@ export default function FounderProfileForm() {
           <input type="number" className="input w-32" value={profile.teamSize} onChange={(e) => set('teamSize', e.target.value)} />
         </div>
         {profile.team.map((member, idx) => (
-          <div key={idx} className="border border-line p-3 grid grid-cols-2 gap-3 relative">
+          <div key={idx} className="border border-line p-3 grid grid-cols-1 sm:grid-cols-2 gap-3 relative">
             <input className="input" placeholder="Name" value={member.name} onChange={(e) => updateTeamMember(idx, 'name', e.target.value)} />
             <input className="input" placeholder="Role" value={member.role} onChange={(e) => updateTeamMember(idx, 'role', e.target.value)} />
             <input className="input" placeholder="LinkedIn" value={member.linkedIn} onChange={(e) => updateTeamMember(idx, 'linkedIn', e.target.value)} />
@@ -327,7 +328,7 @@ export default function FounderProfileForm() {
       </Section>
 
       <Section title="Links">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="label">Website</label>
             <input className="input" value={profile.website} onChange={(e) => set('website', e.target.value)} />
